@@ -61,11 +61,6 @@ public abstract class CppCoreCodeSandboxTemplate extends CoreCodeSandboxTemplate
         String parentPath = userCodeFile.getParentFile().getAbsolutePath();
         String executablePath = parentPath + File.separator + "main";
 
-        // Windows系统下需要加上.exe后缀
-        if (System.getProperty("os.name").toLowerCase().contains("win")) {
-            executablePath += ".exe";
-        }
-
         // 修改编译命令，使用g++编译C++文件
         // 通过shell解释器执行命令
         String[] shellCmd = {"/bin/sh", "-c", "g++ -std=c++11 -o " + executablePath +" " + parentPath + "/*.cpp"};
@@ -85,11 +80,6 @@ public abstract class CppCoreCodeSandboxTemplate extends CoreCodeSandboxTemplate
     public List<ExecuteMessage> runFile(File userCodeFile, List<String> inputList) {
         String userCodeParentPath = userCodeFile.getParentFile().getAbsolutePath();
         String executablePath = userCodeParentPath + File.separator + "main";
-
-        // Windows系统下需要加上.exe后缀
-        if (System.getProperty("os.name").toLowerCase().contains("win")) {
-            executablePath += ".exe";
-        }
 
         List<ExecuteMessage> executeMessageList = new ArrayList<>();
         for(String inputArgs : inputList){
